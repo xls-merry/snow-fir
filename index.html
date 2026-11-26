@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>圣诞夜 · 粒子圣诞树</title>
+  <link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Great+Vibes&family=Noto+Serif+SC:wght@400;600&display=swap">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- 主画布：夜空、飘雪、粒子树与入场动画 -->
+  <canvas id="scene"></canvas>
+
+  <!-- 入场提示 -->
+  <div id="hint" class="hint">点击雪花，唤来飘雪</div>
+
+  <!-- 自定义祝福语：主 + 副 -->
+  <div id="greeting" class="greeting">
+    <svg class="greeting-snow" viewBox="0 0 24 24" width="26" height="26" aria-hidden="true">
+      <g stroke="rgba(220,238,255,0.9)" stroke-width="1.2" stroke-linecap="round">
+        <line x1="12" y1="3" x2="12" y2="21"/>
+        <line x1="3" y1="12" x2="21" y2="12"/>
+        <line x1="5.6" y1="5.6" x2="18.4" y2="18.4"/>
+        <line x1="18.4" y1="5.6" x2="5.6" y2="18.4"/>
+        <line x1="12" y1="3" x2="10" y2="6"/>
+        <line x1="12" y1="3" x2="14" y2="6"/>
+        <line x1="12" y1="21" x2="10" y2="18"/>
+        <line x1="12" y1="21" x2="14" y2="18"/>
+      </g>
+    </svg>
+    <div class="greeting-text">
+      <div id="greetingMain" class="greeting-main">Merry Christmas</div>
+      <div id="greetingSub" class="greeting-sub">愿你平安喜乐</div>
+    </div>
+    <svg class="greeting-snow" viewBox="0 0 24 24" width="26" height="26" aria-hidden="true">
+      <g stroke="rgba(220,238,255,0.9)" stroke-width="1.2" stroke-linecap="round">
+        <line x1="12" y1="3" x2="12" y2="21"/>
+        <line x1="3" y1="12" x2="21" y2="12"/>
+        <line x1="5.6" y1="5.6" x2="18.4" y2="18.4"/>
+        <line x1="18.4" y1="5.6" x2="5.6" y2="18.4"/>
+        <line x1="12" y1="3" x2="10" y2="6"/>
+        <line x1="12" y1="3" x2="14" y2="6"/>
+        <line x1="12" y1="21" x2="10" y2="18"/>
+        <line x1="12" y1="21" x2="14" y2="18"/>
+      </g>
+    </svg>
+  </div>
+
+  <!-- 底部装饰面板（常驻，不可收起） -->
+  <aside id="panel" class="panel" aria-label="装饰面板">
+    <div class="panel-head">
+      <span class="panel-title">装饰面板</span>
+    </div>
+
+    <section class="panel-section">
+      <h3 class="section-label">雪量</h3>
+      <div class="slider-row">
+        <span class="slider-side">少</span>
+        <input type="range" id="snowSlider" min="0" max="100" value="55">
+        <span class="slider-side">多</span>
+      </div>
+    </section>
+
+    <section class="panel-section">
+      <h3 class="section-label">树色</h3>
+      <div class="swatch-row" id="paletteRow">
+        <button class="swatch" data-palette="ice" title="银蓝" style="--c1:#bcd9ff;--c2:#8fb8ff"></button>
+        <button class="swatch" data-palette="goldred" title="暖金红" style="--c1:#ffc873;--c2:#e85a5a"></button>
+        <button class="swatch" data-palette="green" title="墨绿金" style="--c1:#7fc98a;--c2:#ffd98a"></button>
+        <button class="swatch" data-palette="violet" title="紫晶" style="--c1:#c9a6ff;--c2:#8a6fd8"></button>
+        <button class="swatch" data-palette="pink" title="粉樱" style="--c1:#ffb7d9;--c2:#ff7eb6"></button>
+        <button class="swatch" data-palette="mint" title="青柠" style="--c1:#c8f5e0;--c2:#5fd9a8"></button>
+        <input type="color" id="customColor" class="swatch custom" value="#ffd166" title="任意颜色">
+      </div>
+    </section>
+
+    <section class="panel-section">
+      <h3 class="section-label">主祝福语</h3>
+      <input type="text" id="greetingMainInput" class="text-input" maxlength="24" placeholder="输入主祝福语">
+      <h3 class="section-label sub-label">副祝福语</h3>
+      <input type="text" id="greetingSubInput" class="text-input" maxlength="24" placeholder="输入副祝福语">
+      <div class="slider-row">
+        <span class="slider-side">小</span>
+        <input type="range" id="sizeSlider" min="20" max="96" value="54">
+        <span class="slider-side">大</span>
+      </div>
+    </section>
+  </aside>
+
+  <script src="app.js"></script>
+</body>
+</html>
