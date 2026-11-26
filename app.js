@@ -69,6 +69,7 @@ const hoverAnim = { t: 0 };
 
 const panelEl = document.getElementById('panel');
 const greetingEl = document.getElementById('greeting');
+const panelToggle = document.getElementById('panelToggle');
 
 const MAX_SNOW = 180;
 
@@ -133,7 +134,7 @@ function currentPalette() {
 /* ---------- 几何布局（树位于左侧面板右侧的合适区域，不居正中） ---------- */
 function layout() {
   const panelW = W < 768 ? 230 : 280;
-  const areaLeft = panelW;
+  const areaLeft = W < 768 ? 0 : panelW;
   const areaRight = W;
   const areaW = Math.max(areaRight - areaLeft, 200);
   G.cx = areaLeft + areaW * 0.52;
@@ -768,9 +769,10 @@ function drawShards() {
 /* ---------- 粒子烟花（树左右两侧偏上，盛大绽放） ---------- */
 function launchFirework(pal) {
   const panelW = W < 768 ? 230 : 280;
+  const leftBound = W < 768 ? 16 : panelW + 24;
   const side = Math.random() < 0.5 ? -1 : 1;
   let x = G.cx + side * G.R * (0.7 + Math.random() * 0.9);
-  x = Math.max(panelW + 24, Math.min(W - 24, x));
+  x = Math.max(leftBound, Math.min(W - 24, x));
   const y = H * (0.12 + Math.random() * 0.26);
   const colors = [pal.star, pal.ribbon, pal.ball, '#ffffff'];
   const parts = [];
@@ -835,6 +837,7 @@ const hintEl = document.getElementById('hint');
 function updatePanel() {
   panelEl.classList.toggle('show', state.phase === 'tree');
 }
+panelToggle.addEventListener('click', () => panelEl.classList.toggle('show'));
 function updateGreeting() {
   greetingEl.classList.toggle('show', state.phase === 'tree');
 }

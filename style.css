@@ -100,6 +100,10 @@ html, body {
   filter: drop-shadow(0 0 6px rgba(190, 225, 255, 0.6));
 }
 
+/* ===== 移动端面板开关（桌面端隐藏） ===== */
+.panel-toggle {
+  display: none;
+}
 /* ===== 装饰面板（左侧竖向停靠，常驻） ===== */
 .panel {
   position: fixed;
@@ -246,10 +250,43 @@ input[type="color"].swatch::-moz-color-swatch { border: none; border-radius: 50%
 
 /* ===== 响应式 ===== */
 @media (max-width: 768px) {
-  .panel { width: 230px; padding: 16px 14px 20px; }
-  .greeting { gap: 10px; }
-  .greeting-main { font-size: 38px; }
-  .greeting-sub { font-size: 16px; }
-  .greeting-snow { width: 18px; height: 18px; }
-  .hint { font-size: 13px; top: 12%; }
+  .panel {
+    width: min(82vw, 300px);
+    padding: 16px 14px 24px;
+    box-shadow: 8px 0 30px rgba(0, 0, 0, 0.45);
+  }
+
+  /* 右下角悬浮设置按钮 */
+  .panel-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    right: 16px;
+    bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+    z-index: 11;
+    min-width: 64px;
+    height: 40px;
+    padding: 0 18px;
+    border-radius: 20px;
+    border: 1px solid var(--panel-border);
+    background: var(--panel-bg);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    color: var(--text-main);
+    font-size: 14px;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+  }
+
+  .greeting {
+    gap: 10px;
+    bottom: calc(10% + env(safe-area-inset-bottom, 0px));
+    max-width: 92vw;
+  }
+  .greeting-main { font-size: clamp(28px, 8.5vw, 38px); }
+  .greeting-sub { font-size: 15px; letter-spacing: 0.16em; }
+  .greeting-snow { display: none; }
+  .hint { font-size: 13px; top: auto; }
 }
